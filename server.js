@@ -133,7 +133,7 @@ function addEmployee() {
       ])
         .then(res => {
           let name = res;
-          db.createDepartment(name)
+          db.createEmployee(name)
             .then(() => console.log(`Added ${name.name} to the database`))
             .then(() => loadMainPrompts())
         })
