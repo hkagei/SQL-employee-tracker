@@ -36,7 +36,8 @@ function initialPrompt() {
             value: "EXIT"
         }
     ]
-    }]).then(res => {
+    }])
+    .then(res => {
         let option = res.option;
         switch(option) {
             case "VIEW_ALL_DEPARTMENTS":
