@@ -7,7 +7,7 @@ initialPrompt();
 function initialPrompt() {
     prompt([{
     type: 'list',
-    name: 'username',
+    name: 'option',
     message: "What would you like to do?",
     choices: [
         {
