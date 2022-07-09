@@ -106,7 +106,7 @@ function addDepartment() {
           let name = res;
           db.createDepartment(name)
             .then(() => console.log(`Added ${name.name} to the database`))
-            .then(() => loadMainPrompts())
+            .then(() => initialPrompt())
         })
 };
 
@@ -121,23 +121,42 @@ function addRole() {
           let name = res;
           db.createRole(name)
             .then(() => console.log(`Added ${name.name} to the database`))
-            .then(() => loadMainPrompts())
+            .then(() => initialPrompt())
         })
     }
 
 function addEmployee() {
     prompt([
         {
-          name: "name",
-          message: "What is the employe's name?"
-        }
+          name: "first_name", 
+          message: "What is the employee's first name?",
+        },
+        {
+            name: "last_name", 
+            message: "What is the employee's last name?",
+        },
+
       ])
-        .then(res => {
-          let name = res;
-          db.createEmployee(name)
-            .then(() => console.log(`Added ${name.name} to the database`))
-            .then(() => loadMainPrompts())
+        .then(res => {  
+            let first_name = res.first_name;
+            let last_name = res.last_name;
+            db.getAllRoles()
+            .then(([rows]) => {
+          let roles = rows;
+          const roleChoices = roles.map(({ id, title }) => ({
+            name: title,
+            value: id
+          }));
+
+          prompt({
+            type: "list",
+            name: "roleId",
+            message: "What is the employee's role?",
+            choices: roleChoices
+          })
+
         })
+    });
 }
 
 function quit() {

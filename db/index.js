@@ -17,16 +17,18 @@ getAllRoles() {
     return this.connection.promise().query("SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department on role.department_id=deparment.id;")
 }
 
-createDepartment() {
+createDepartment(department) {
+    return this.connection.promise().query("INSERT INTO department SET ?", department)
+}
+
+createRole(role) {
+    return this.connection.promise().query("INSERT INTO role SET ?", role)
+}
+
+createEmployee(employee) {
+    return this.connection.promise().query("INSERT INTO employee SET ?", employee)
+}
 
 }
 
-createRole() {
-    
-}
-
-createEmployee() {
-
-}
-
-}
+module.exports = new Data(connection);

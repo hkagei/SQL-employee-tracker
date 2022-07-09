@@ -1,19 +1,23 @@
-INSERT INTO department (id, name)
-VALUES
-    (1, "Sales"),
-    (2, "Customer Support"),
-    (3, "Finance"),
-    (4, "Engineering"),
-    (5, "Legal");
+use employee_db;
 
-INSERT INTO role (id, department_id)
+INSERT INTO department (name)
 VALUES
-    (1, "Salesperson"),
-    (2, "Lead engineer"),
-    (3, "Software engineer"),
-    (4, "Account manager"),
-    (5, "Accountant"),
-    (6, "Legal team lead"),
-    (7, "Lawyer")
+    ("Sales"),
+    ("Customer Support"),
+    ("Finance"),
+    ("Engineering"),
+    ("Legal");
 
-INSERT INTO employee (id)
+INSERT INTO role (title, salary, department_id)
+VALUES
+    ("Salesperson", 100000, 2),
+    ("Lead engineer", 300000, 4),
+    ("Software engineer", 150000, 4),
+    ("Account manager", 200000, 3),
+    ("Accountant", 125000, 3),
+    ("Legal team lead", 175000, 5),
+    ("Lawyer", 350000, 5);
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES
+	("Hiro", "Kagei", 3, NULL)
