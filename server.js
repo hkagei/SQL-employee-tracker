@@ -105,7 +105,7 @@ function addDepartment() {
         .then(res => {
           let name = res;
           db.createDepartment(name)
-            .then(() => console.log(`Added ${name.name} to the database`))
+            .then(() => console.log(`Added ${first_name.last_name} to the database`))
             .then(() => initialPrompt())
         })
 };
@@ -120,7 +120,7 @@ function addRole() {
         .then(res => {
           let name = res;
           db.createRole(name)
-            .then(() => console.log(`Added ${name.name} to the database`))
+            .then(() => console.log(`Added ${first_name.last_name} to the database`))
             .then(() => initialPrompt())
         })
     }
