@@ -10,11 +10,11 @@ getAllEmployees() {
 }
 
 getAllDepartments() {
-    return this.connection.promise().query("SELECT department.id, department.name FROM department;")
+    return this.connection.promise().query("SELECT department_id, department_name FROM department;")
 }
 
 getAllRoles() {
-    return this.connection.promise().query("SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department on role.department_id=deparment.id;")
+    return this.connection.promise().query("SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department on role.department_id=deparment_id;")
 }
 
 createDepartment(department) {

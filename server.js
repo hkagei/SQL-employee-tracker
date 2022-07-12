@@ -81,7 +81,7 @@ function viewRoles() {
     db.getAllRoles().then(([rows]) => {
         let roles = rows;
         console.log('\n');
-        console.table(rows)
+        console.table(roles)
     }).then(() => initialPrompt())
 };
 
@@ -138,8 +138,8 @@ function addEmployee() {
 
       ])
         .then(res => {  
-            let first_name = res.first_name;
-            let last_name = res.last_name;
+            let firstName = res.first_name;
+            let lastName = res.last_name;
             db.getAllRoles()
             .then(([rows]) => {
           let roles = rows;
@@ -153,6 +153,36 @@ function addEmployee() {
             name: "roleId",
             message: "What is the employee's role?",
             choices: roleChoices
+          })
+          .then(res => {
+            let roleId = res.roleId
+            db.getAllEmployees()
+            .then(([rows]) => {
+                let employees = rows
+                const managerChoices = employees.map(({ id, first_name, last_name }) => ({
+                    name: `${first_name} ${last_name}`,
+                    value: id
+                })) 
+                managerChoices.unshift({name: "none", value: null})
+            prompt({
+            type: "list",
+            name: "roleId",
+            message: "What is the employee's manager?",
+            choices: roleChoices
+            })
+            .then(res => {
+                let employee = {
+                    manager_id: res.managerId,
+                    role_id: roleId,
+                    first_name: firstName,
+                    last_name: lastName 
+                }
+                db.createEmployee(employee)
+            })
+            
+            })
+
+            .then(() => initialPrompt())
           })
 
         })
